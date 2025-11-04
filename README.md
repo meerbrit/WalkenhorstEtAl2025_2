@@ -2,8 +2,8 @@
 
 GENERAL INFORMATION
 
-Code and data for Walkenhorst, Braga Goncalves, Drea, Manser 2025.
-Intergenerational androgenic effects on early vocal behaviour suggest fitness advantages along matrilineal lines in a cooperatively breeding mammal
+Code and data for Walkenhorst, Braga Goncalves, Drea & Manser 2025.
+Maternal androgens shape vocal begging patterns in meerkats, providing competitive advantages in dominant matrilines
 
 <hr/> 
 
