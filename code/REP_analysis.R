@@ -189,7 +189,7 @@ ggplot(posterior_desc, aes(y = Parameter, x = Median, xmin = CI_low, xmax = CI_h
   geom_vline(xintercept = 0, color='grey', linetype = 'dotted', linewidth =1)+
   geom_point() +
   geom_errorbarh(height = 0) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
   labs(x = "Parameter value", y = "Parameters") +
   theme_clean()
 
@@ -224,8 +224,8 @@ REP_data$TREATMENT <- factor(REP_data$TREATMENT, levels = c("DC", "SC", "DT"))
 ggplot(REP_LEN_pred, aes(x = REC_AGE, y = REP_len, color = TREATMENT, fill = TREATMENT)) +  
   geom_point(data=REP_data, aes(y=BEG_avg_Len))+
   stat_lineribbon(.width = .95) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
-  scale_fill_okabe_ito(order = c(2, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_fill_okabe_ito(order = c(5, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
   labs(x = "Age (days)", y = "Repeat call length (s)\n") +
   scale_x_continuous(breaks = c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130), guide = guide_axis(angle = 45)) +
   scale_y_continuous(name = "Repeat call duration (s) \n", n.breaks = 10) +
@@ -253,8 +253,8 @@ REP_data$TREATMENT <- factor(REP_data$TREATMENT, levels = c("DC", "SC", "DT"))
 ggplot(REP_LEN_pred, aes(x = REC_AGE, y = REP_len, color = TREATMENT, fill = TREATMENT)) +  
   geom_point(data=REP_data, aes(y=BEG_avg_Len))+
   stat_lineribbon(.width = .95) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
-  scale_fill_okabe_ito(order = c(2, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_fill_okabe_ito(order = c(5, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
   labs(x = "Age (days)", y = "Repeat call length (s)\n") +
   scale_x_continuous(breaks = c(30, 45, 60, 75, 90, 105, 120), guide = guide_axis(angle = 45)) +
   scale_y_continuous(name = "Repeat call duration (s) \n", n.breaks = 10) +
@@ -399,7 +399,7 @@ ggplot(posterior_desc, aes(y = Parameter, x = Median, xmin = CI_low, xmax = CI_h
   geom_vline(xintercept = 0, color='grey', linetype = 'dotted', linewidth =1)+
   geom_point() +
   geom_errorbarh(height = 0) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
   labs(x = "Parameter value", y = "Parameters") +
   theme_clean()#+
 
@@ -435,8 +435,8 @@ REP_data$TREATMENT <- factor(REP_data$TREATMENT, levels = c("DC", "SC", "DT"))
 ggplot(REP_INT_pred, aes(x = REC_AGE, y = REP_int, color = TREATMENT, fill = TREATMENT)) +  
   geom_point(data=REP_data, aes(y=BEG_avg_Int))+
   stat_lineribbon(.width = .95) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
-  scale_fill_okabe_ito(order = c(2, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_fill_okabe_ito(order = c(5, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
   labs(x = "Age (days)", y = "Repeat call interval duration (s)\n") +
   scale_x_continuous(breaks = c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130), guide = guide_axis(angle = 45)) +
   scale_y_continuous(name = "Repeat call interval duration (s) \n", n.breaks = 10) +
@@ -464,8 +464,8 @@ REP_data$TREATMENT <- factor(REP_data$TREATMENT, levels = c("DC", "SC", "DT"))
 ggplot(REP_INT_pred, aes(x = REC_AGE, y = REP_int, color = TREATMENT, fill = TREATMENT)) +  
   geom_point(data=REP_data, aes(y=BEG_avg_Int))+
   stat_lineribbon(.width = .95) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
-  scale_fill_okabe_ito(order = c(2, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_fill_okabe_ito(order = c(5, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
   labs(x = "Age (days)", y = "Repeat call interval duration (s)\n") +
   scale_x_continuous(breaks = c(30, 45, 60, 75, 90, 105, 120), guide = guide_axis(angle = 45)) +
   scale_y_continuous(name = "Repeat call interval duration (s) \n", n.breaks = 10) +
@@ -616,7 +616,7 @@ ggplot(posterior_desc, aes(y = Parameter, x = Median, xmin = CI_low, xmax = CI_h
   geom_vline(xintercept = 0, color='grey', linetype = 'dotted', linewidth =1)+
   geom_point() +
   geom_errorbarh(height = 0) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
   labs(x = "Parameter value", y = "Parameters") +
   theme_clean()#+
 
@@ -652,8 +652,8 @@ REP_RAT_pred$TREATMENT <- factor(REP_RAT_pred$TREATMENT, levels = c("DC", "SC", 
 ggplot(REP_RAT_pred, aes(x = REC_AGE, y = REP_rate, color = TREATMENT, fill = TREATMENT)) +  
   geom_point(data=REP_data, aes(y=BEG_rate))+
   stat_lineribbon(.width = .95) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
-  scale_fill_okabe_ito(order = c(2, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_fill_okabe_ito(order = c(5, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
   labs(x = "Age (days)", y = "Repeat call rate (calls/s)\n") +
   scale_x_continuous(breaks = c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130), guide = guide_axis(angle = 45)) +
   scale_y_continuous(name = "Repeat call rate (calls/s) \n", n.breaks = 10) +
@@ -681,8 +681,8 @@ REP_data$TREATMENT <- factor(REP_data$TREATMENT, levels = c("DC", "SC", "DT"))
 ggplot(REP_RAT_pred, aes(x = REC_AGE, y = BEG_rate, color = TREATMENT, fill = TREATMENT)) +  
   geom_point(data=REP_data, aes(y=BEG_rate))+
   stat_lineribbon(.width = .95) +
-  scale_color_okabe_ito(order = c(2, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
-  scale_fill_okabe_ito(order = c(2, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_color_okabe_ito(order = c(5, 1, 3), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
+  scale_fill_okabe_ito(order = c(5, 1, 3), alpha = 0.3, name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT')) +
   labs(x = "Age (days)", y = "Repeat call rate (calls/s)\n") +
   scale_x_continuous(breaks = c(30, 45, 60, 75, 90, 105, 120), guide = guide_axis(angle = 45)) +
   scale_y_continuous(name = "Repeat call rate (calls/s) \n", n.breaks = 10) +
