@@ -155,20 +155,24 @@ posterior_desc <- describe_posterior(
 # drop sigma row
 posterior_desc <- posterior_desc[-c(1,24),]
 
+# define control vars
+control_vars <- c('Monthly rainfall', 'Group size^2', 'Group size', 'Competition', 'Body mass offset')
+
 # clean up labels:
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'b_', '')
-posterior_desc$TREATMENT <- ifelse(grepl("TREATMENTSC", posterior_desc$Parameter), "SC",
-                             ifelse(grepl("TREATMENTDT", posterior_desc$Parameter), "DT", "DC"))
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTDT', 'DT')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTSC', 'SC')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IAGE_zE2', 'Age^2')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'AGE_z', 'Age')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'SEXM', 'Male')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'WEIGHT_z', 'Body mass offset')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'COMP_NORM_z', 'Competition')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IGS_zE2', 'Group size^2')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'GS_z', 'Group size')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'RAIN_z', 'Monthly rainfall')
+posterior_desc$TREATMENT <- ifelse(grepl("SC", posterior_desc$Parameter), "SC",
+                                   ifelse(grepl("DT", posterior_desc$Parameter), "DT", 
+                                          ifelse(posterior_desc$Parameter %in% control_vars, "control", "DC")))
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTDT', 'DT')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTSC', 'SC')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IAGE_zE2', 'Age^2')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'AGE_z', 'Age')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'SEXM', 'Male')
 
 custom_order <- c('Monthly rainfall',
                   'Group size^2',
@@ -183,13 +187,13 @@ custom_order <- c('Monthly rainfall',
                   'DT','SC')
 
 posterior_desc$Parameter <- factor(posterior_desc$Parameter, levels = custom_order)
-posterior_desc$TREATMENT <- factor(posterior_desc$TREATMENT, levels = c("DC", "SC", "DT"))
+posterior_desc$TREATMENT <- factor(posterior_desc$TREATMENT, levels = c("DC", "SC", "DT", 'control'))
 # Coeff_REP_LEN 700*800
 ggplot(posterior_desc, aes(y = Parameter, x = Median, xmin = CI_low, xmax = CI_high, color=TREATMENT)) +
   geom_vline(xintercept = 0, color='grey', linetype = 'dotted', linewidth =1)+
   geom_point() +
   geom_errorbarh(height = 0) +
-  scale_color_okabe_ito(order = c(2, 1, 7), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
+  scale_color_okabe_ito(order = c(2, 1, 7, 8), name = "Effect group", labels = c('DC', 'SC', 'DT', 'Population-level\ncovariates'))+ 
   labs(x = "Parameter value", y = "Parameters") +
   theme_clean()
 
@@ -365,20 +369,24 @@ posterior_desc <- describe_posterior(
 # drop sigma row
 posterior_desc <- posterior_desc[-c(24, 1),]
 
+# define control vars
+control_vars <- c('Monthly rainfall', 'Group size^2', 'Group size', 'Competition', 'Body mass offset')
+
 # clean up labels:
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'b_', '')
-posterior_desc$TREATMENT <- ifelse(grepl("TREATMENTSC", posterior_desc$Parameter), "SC",
-                                   ifelse(grepl("TREATMENTDT", posterior_desc$Parameter), "DT", "DC"))
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTSC', 'SC')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTDT', 'DT')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IAGE_zE2', 'Age^2')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'AGE_z', 'Age')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'SEXM', 'Male')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'WEIGHT_z', 'Body mass offset')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'COMP_NORM_z', 'Competition')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IGS_zE2', 'Group size^2')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'GS_z', 'Group size')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'RAIN_z', 'Monthly rainfall')
+posterior_desc$TREATMENT <- ifelse(grepl("SC", posterior_desc$Parameter), "SC",
+                                   ifelse(grepl("DT", posterior_desc$Parameter), "DT", 
+                                          ifelse(posterior_desc$Parameter %in% control_vars, "control", "DC")))
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTSC', 'SC')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTDT', 'DT')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IAGE_zE2', 'Age^2')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'AGE_z', 'Age')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'SEXM', 'Male')
 
 custom_order <- c('Monthly rainfall',
                   'Group size^2',
@@ -393,16 +401,17 @@ custom_order <- c('Monthly rainfall',
                   'DT','SC')
 
 posterior_desc$Parameter <- factor(posterior_desc$Parameter, levels = custom_order)
-posterior_desc$TREATMENT <- factor(posterior_desc$TREATMENT, levels = c("DC", "SC", "DT"))
+posterior_desc$TREATMENT <- factor(posterior_desc$TREATMENT, levels = c("DC", "SC", "DT", "control"))
 
 # Coeff_REP_INT 700*800
 ggplot(posterior_desc, aes(y = Parameter, x = Median, xmin = CI_low, xmax = CI_high, color=TREATMENT)) +
   geom_vline(xintercept = 0, color='grey', linetype = 'dotted', linewidth =1)+
   geom_point() +
   geom_errorbarh(height = 0) +
-  scale_color_okabe_ito(order = c(2, 1, 7), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
+  scale_color_okabe_ito(order = c(2, 1, 7, 8), name = "Effect group", labels = c('DC', 'SC', 'DT', 'Population-level\ncovariates'))+ 
   labs(x = "Parameter value", y = "Parameters") +
-  theme_clean()#+
+  theme_clean()
+
 
 # Ontogeny 30 - 130 ####
 # get all needed values
@@ -582,20 +591,24 @@ posterior_desc <- describe_posterior(
 # drop sigma row
 posterior_desc <- posterior_desc[-c(24, 1),]
 
+# define control vars
+control_vars <- c('Monthly rainfall', 'Group size^2', 'Group size', 'Competition', 'Body mass offset')
+
 # clean up labels:
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'b_', '')
-posterior_desc$TREATMENT <- ifelse(grepl("TREATMENTSC", posterior_desc$Parameter), "SC",
-                                   ifelse(grepl("TREATMENTDT", posterior_desc$Parameter), "DT", "DC"))
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTSC', 'SC')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTDT', 'DT')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IAGE_zE2', 'Age^2')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'AGE_z', 'Age')
-posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'SEXM', 'Male')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'WEIGHT_z', 'Body mass offset')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'COMP_NORM_z', 'Competition')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IGS_zE2', 'Group size^2')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'GS_z', 'Group size')
 posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'RAIN_z', 'Monthly rainfall')
+posterior_desc$TREATMENT <- ifelse(grepl("SC", posterior_desc$Parameter), "SC",
+                                   ifelse(grepl("DT", posterior_desc$Parameter), "DT", 
+                                          ifelse(posterior_desc$Parameter %in% control_vars, "control", "DC")))
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTSC', 'SC')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'TREATMENTDT', 'DT')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'IAGE_zE2', 'Age^2')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'AGE_z', 'Age')
+posterior_desc$Parameter <- str_replace_all(posterior_desc$Parameter, 'SEXM', 'Male')
 
 custom_order <- c('Monthly rainfall',
                   'Group size^2',
@@ -610,16 +623,16 @@ custom_order <- c('Monthly rainfall',
                   'DT','SC')
 
 posterior_desc$Parameter <- factor(posterior_desc$Parameter, levels = custom_order)
-posterior_desc$TREATMENT <- factor(posterior_desc$TREATMENT, levels = c("DC", "SC", "DT"))
+posterior_desc$TREATMENT <- factor(posterior_desc$TREATMENT, levels = c("DC", "SC", "DT", 'control'))
 
 # Coeff_REP_RAT 700*800
 ggplot(posterior_desc, aes(y = Parameter, x = Median, xmin = CI_low, xmax = CI_high, color=TREATMENT)) +
   geom_vline(xintercept = 0, color='grey', linetype = 'dotted', linewidth =1)+
   geom_point() +
   geom_errorbarh(height = 0) +
-  scale_color_okabe_ito(order = c(2, 1, 7), name = "Maternal\nstatus", labels = c('DC', 'SC', 'DT'))+
+  scale_color_okabe_ito(order = c(2, 1, 7, 8), name = "Effect group", labels = c('DC', 'SC', 'DT', 'Population-level\ncovariates'))+ 
   labs(x = "Parameter value", y = "Parameters") +
-  theme_clean()#+
+  theme_clean()
 
 rm(posterior_desc)
 
