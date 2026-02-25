@@ -2,7 +2,7 @@
 
 GENERAL INFORMATION
 
-Code and data for Walkenhorst, Braga Goncalves, Drea & Manser 2026.
+Code and data for Walkenhorst, Braga Goncalves, Drea, Manser 2026.
 Maternal androgens shape vocal begging patterns in meerkats, providing competitive advantages in dominant matrilines
 
 <hr/> 
